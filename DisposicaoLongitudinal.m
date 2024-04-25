@@ -144,14 +144,14 @@ function DisposicaoLongitudinal
         fprintf('\tMomento fletor máximo: %f kN.cm\n', M_cric(1,i));
         fprintf('\tPosição do momento fletor máximo: %f cm\n', Lspan(z_cric(1,i)));
 
-        e_min(:,(i-1)*2 + 1) = 1/F(1,i)*(M(:,i) + Wb*sigma_min(i)) - kt;
-        e_min(:,(i-1)*2 + 2) = 1/F(1,i)*(M(:,i) - Wt*sigma_max(i)) + kb;
-        e_max(:,(i-1)*2 + 1) = 1/F(1,i)*(M(:,i) + Wb*sigma_max(i)) - kt;
-        e_max(:,(i-1)*2 + 2) = 1/F(1,i)*(M(:,i) - Wt*sigma_min(i)) + kb;
-        e_min_cric(1,(i-1)*2 + 1) = 1/F(1,i)*(M_cric(1,i) + Wb*sigma_min(i)) - kt;
-        e_min_cric(1,(i-1)*2 + 2) = 1/F(1,i)*(M_cric(1,i) - Wt*sigma_max(i)) + kb;
-        e_max_cric(1,(i-1)*2 + 1) = 1/F(1,i)*(M_cric(1,i) + Wb*sigma_max(i)) - kt;
-        e_max_cric(1,(i-1)*2 + 2) = 1/F(1,i)*(M_cric(1,i) - Wt*sigma_min(i)) + kb;
+        e_min(:,(i-1)*2 + 1) = 1/F(i)*(M(:,i) + Wb*sigma_min(i)) - kt;
+        e_min(:,(i-1)*2 + 2) = 1/F(i)*(M(:,i) - Wt*sigma_max(i)) + kb;
+        e_max(:,(i-1)*2 + 1) = 1/F(i)*(M(:,i) + Wb*sigma_max(i)) - kt;
+        e_max(:,(i-1)*2 + 2) = 1/F(i)*(M(:,i) - Wt*sigma_min(i)) + kb;
+        e_min_cric(1,(i-1)*2 + 1) = 1/F(i)*(M_cric(1,i) + Wb*sigma_min(i)) - kt;
+        e_min_cric(1,(i-1)*2 + 2) = 1/F(i)*(M_cric(1,i) - Wt*sigma_max(i)) + kb;
+        e_max_cric(1,(i-1)*2 + 1) = 1/F(i)*(M_cric(1,i) + Wb*sigma_max(i)) - kt;
+        e_max_cric(1,(i-1)*2 + 2) = 1/F(i)*(M_cric(1,i) - Wt*sigma_min(i)) + kb;
     end
 
     e_min(:,length(eta)*2+1) = -(yt-dp);
@@ -193,9 +193,9 @@ function DisposicaoLongitudinal
     figure(2)
     plot(Lspan, -e_min_z, '-r', Lspan, -e_max_z, '-b', Lspan, yt*ones(size(Lspan)), '-k', Lspan, -yb*ones(size(Lspan)), '-k', Lspan, zeros(size(Lspan)), '--k')
     xlabel('x (cm)')
-    ylabel('e (cm)')
+    ylabel('y (cm)')
     title('Região Limite')
-    legend('e_{min}', 'e_{max}','Borda superior: y=yt', 'Borda inferior: y=-yb', 'CG')
+    legend('e_{b}', 'e_{t}','Borda superior: y=yt', 'Borda inferior: y=-yb', 'CG')
     xlim([0 L])
     ylim([-yb*1.25 yt*1.25])
     grid on

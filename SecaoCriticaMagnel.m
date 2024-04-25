@@ -132,8 +132,6 @@ function SecaoCriticaIntervalo
 
     M_cric = zeros(1,length(eta));
     z_cric = zeros(1,length(eta));
-    e_min = zeros(3,1);
-    e_max = zeros(3,1);
     coef_ang_e_min = zeros(2,length(eta));
     coef_ang_e_max = zeros(2,length(eta));
     for i = 1:length(eta)
